@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 "A" Сыныбы</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    min-height: 100vh;
+    color: white;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+header p {
+    opacity: 0.9;
+}
+
+#searchInput {
+    margin-top: 20px;
+    padding: 12px 20px;
+    width: 320px;
+    max-width: 90%;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+
+.container {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    background: white;
+    color: #764ba2;
+}
+
+.profile {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.profile h2 {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.profile-box {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    padding: 30px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.back-btn {
+    margin-top: 25px;
+    padding: 10px 25px;
+    border-radius: 25px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    background: white;
+    color: #764ba2;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #764ba2;
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+    <h1>10 "A" Сыныбы</h1>
+    <p>Лаура апай және оның достары</p>
+    <input type="text" id="searchInput" placeholder="Оқушы атын іздеу..." onkeyup="searchStudents()">
+</header>
+
+<div class="container" id="studentList"></div>
+
+<div class="profile" id="profilePage">
+    <h2 id="studentName"></h2>
+    <div class="profile-box">
+        <p><strong>Сынып:</strong> 10 "A"</p>
+        <p><strong>Мектеп:</strong> №13 орта мектеп</p>
+        <p><strong>Жеке кабинет парақшасы</strong></p>
+    </div>
+    <br>
+    <button class="back-btn" onclick="goBack()">← Артқа қайту</button>
+</div>
+
+<script>
+
+const students = [
+"Құдайбергенов Айбек",
+"Төлеуов Ерасыл",
+"Дәрібай Ерсұлтан",
+"Мырзабаев Ақниет",
+"Нұрғазиев Бақдаулет",
+"Мырзабаев Айболат",
+"Орнықбаева Наргиз",
+"Таңатова Назерке",
+"Жылқышиева Ақнұр",
+"Исралиев Даниель",
+"Сері Нұрдаулет",
+"Серікқалиев Досжан",
+"Алдыоңғар Нұрдос",
+"Болатұлы Ералы",
+"Әлиұлы Ақтан",
+"Тәңірберген Әділет",
+"Аманов Ернұр",
+"Құрманалиев Айбек",
+"Жұмабаев Жұбаныш"
+];
+
+const list = document.getElementById("studentList");
+
+students.forEach(name => {
+    let div = document.createElement("div");
+    div.className = "card";
+    div.innerText = name;
+    div.onclick = () => openProfile(name);
+    list.appendChild(div);
+});
+
+function searchStudents() {
+    let input = document.getElementById("searchInput").value.toLowerCase();
+    let cards = document.getElementsByClassName("card");
+
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].innerText.toLowerCase();
+        cards[i].style.display = name.includes(input) ? "block" : "none";
+    }
+}
+
+function openProfile(name) {
+    document.getElementById("mainHeader").style.display = "none";
+    document.getElementById("studentList").style.display = "none";
+    document.getElementById("profilePage").style.display = "block";
+    document.getElementById("studentName").innerText = name;
+}
+
+function goBack() {
+    document.getElementById("mainHeader").style.display = "block";
+    document.getElementById("studentList").style.display = "grid";
+    document.getElementById("profilePage").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
